@@ -1,0 +1,20 @@
+jdk -> jre -> jvm
+
+
+JVM : stack memory, heap memory  
+
+
+every method will have its own stack.
+
+
+Static: can call through classname, no need to create object for class..
+
+every class will have it's own .class file..
+
+Strings: it's a class, immutable, 
+
+stringbuffer used to make the string mutable. "Stringbuffer"
+
+
+
+Arrrays:
