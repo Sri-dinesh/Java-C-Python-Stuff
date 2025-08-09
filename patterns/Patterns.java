@@ -221,9 +221,142 @@ public class Patterns {
     }
 
     void RepeatedRowCharTriangle() {
-        for (int i = 1; i <= 'A' + i; i++) {
-            for (char j = 'A'; j <= i; j++) {
-                System.out.print(j + " ");
+        for (int i = 0; i <= n; i++) {
+            char ch = (char) ('A' + i);
+            for (int j = 0; j <= i; j++) {
+                System.out.print(ch + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    void TriangleChar() {
+        for (int i = 0; i <= n; i++) {
+            // space
+            for (int j = 0; j < n - i - 1; j++) {
+                System.out.print(" ");
+            }
+
+            // letters
+            char ch = 'A';
+            int breakpoint = (2 * i + 1) / 2;
+            for (int j = 1; j <= 2 * i + 1; j++) {
+                System.out.print(ch);
+                if (j <= breakpoint)
+                    ch++;
+                else
+                    ch--;
+            }
+            // space
+            for (int j = 0; j < n - i - 1; j++) {
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+
+    void TriangleConfusionchar() {
+        for (int i = 0; i < n; i++) {
+            for (char ch = (char) ('E' - i); ch <= 'E'; ch++) {
+                System.out.print(ch + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    void StarCenterDiamond() {
+        int space = 0;
+        for (int i = 0; i < n; i++) {
+            // stars
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print("*");
+            }
+
+            // spaces
+            for (int j = 0; j < space; j++) {
+                System.out.print(" ");
+            }
+
+            // stars
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print("*");
+            }
+            space += 2;
+            System.out.println();
+        }
+
+        space = 2 * n - 2;
+        for (int i = 1; i <= n; i++) {
+            // stars
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+
+            // spaces
+            for (int j = 0; j < space; j++) {
+                System.out.print(" ");
+            }
+
+            // stars
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            space -= 2;
+            System.out.println();
+        }
+    }
+
+    void TriangleLetterH() {
+        int spaces = 2 * n - 2;
+        for (int i = 1; i <= 2 * n - 1; i++) {
+            int stars = i;
+            if (i > n)
+                stars = 2 * n - i;
+            // stars
+            for (int j = 1; j <= stars; j++) {
+                System.out.print("*");
+            }
+
+            // spaces
+            for (int j = 1; j <= spaces; j++) {
+                System.out.print(" ");
+            }
+
+            // stars
+            for (int j = 1; j <= stars; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+            if (i < n)
+                spaces -= 2;
+            else
+                spaces += 2;
+
+        }
+    }
+
+    void SquareOutline() {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || j == 0 || i == n - 1 || j == n - 1) {
+                    System.out.print("*");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    void NumbersPattern() {
+        for (int i = 0; i < 2 * n - 1; i++) {
+            for (int j = 0; j < 2 * n - 1; j++) {
+                int top = i;
+                int left = j;
+                int right = (2 * n - 2) - j;
+                int down = (2 * n - 2) - i;
+                System.out.print(n - Math.min(Math.min(top, down), Math.min(left, right)) + " ");
+
             }
             System.out.println();
         }
@@ -295,6 +428,30 @@ public class Patterns {
 
         System.out.println("RepeatedRowCharTriangle");
         patterns.RepeatedRowCharTriangle();
+        System.out.println();
+
+        System.out.println("TriangleChar");
+        patterns.TriangleChar();
+        System.out.println();
+
+        System.out.println("TriangleConfusionchar");
+        patterns.TriangleConfusionchar();
+        System.out.println();
+
+        System.out.println(" StarCenterDiamond");
+        patterns.StarCenterDiamond();
+        System.out.println();
+
+        System.out.println("TriangleLetterH");
+        patterns.TriangleLetterH();
+        System.out.println();
+
+        System.out.println("SquareOutline");
+        patterns.SquareOutline();
+        System.out.println();
+
+        System.out.println("NumbersPattern");
+        patterns.NumbersPattern();
         System.out.println();
 
         sc.close();
