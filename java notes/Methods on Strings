@@ -1,0 +1,12 @@
+Methods on Strings
+
+charAt() - returns the character at the specified index
+ex: String s1 = "Java Programming"
+System.out.println(s);
+
+
+
+
+
+
+
