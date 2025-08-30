@@ -1,0 +1,53 @@
+Arrays: Is a collection of homogeneous elements, used to store in contiginous memory location.
+array allows random access using indices.
+
+In python lists are often used as arrays, but we also have array module NUMPY for numerical operations.
+
+Creating 1D array - using list or NUMPY module.
+
+Ex: array = [10, 20, 30, 40]
+
+Array Module is Type Specific.
+
+Ex: arr = array.arr('i',[1, 2, 3, 4, 5])
+
+Numpy is fast & scientific computing
+Ex: 
+	import numpy as np
+	arr = np.arr[1,2,3,4,5]
+	
+Accessing array elements - we can access arrray elements using array indexes.
+Ex: 
+	arr = [1,2,3,4,5]
+	print(arr[3])
+
+
+
+Permutations - Arrrangement of all the elements in the array in different order.
+Ex:
+	arr = [1,2,34,6,98]
+	[34,6,2][1,6,98][98,2,6]
+	
+	Formula: The numbers ways to arrange R elements out of n elements.
+	
+	n!/(n! - r!)
+	
+
+Combinations: Selection of elements without considering order.
+Ex: arr = [1,2,3]
+	[1,2][2,3][3,1]
+	
+	Order doesn't matter in combinations.
+	
+
+
+ int left = l;
+        int right = r;
+        while(left < right){
+            int temp = arr.get(left-1);
+            arr.set(left-1 , arr.get(right-1));
+            arr.set(right-1 , temp);
+            left++;
+            right--;
+        }
+        return arr;
