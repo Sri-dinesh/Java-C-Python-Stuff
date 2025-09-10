@@ -1,36 +1,54 @@
+import java.util.Scanner;
 
 public class String1 {
     public static void main(String[] args) {
-        StringBuilder sb = new StringBuilder("Sridinesh");
-        // provides 16bytes more size
-        System.out.println("String Builder");
-        System.out.println(sb.capacity());
-        System.out.println(sb.length());
+        String s1 = "Java";
+        String s2 = "Java";
 
-        sb.append(" Random Developer");
-        System.out.println(sb);
-        sb.insert(2, "Java");
-        System.out.println(sb);
-        sb.delete(0, 2);
-        System.out.println(sb);
-        System.out.println("----");
-        // sb.reverse();
-        System.out.println(sb);
-        System.out.println("----");
-        sb.charAt(2);
-        System.out.println(sb);
-        sb.substring(2, 4);
-        System.out.println(sb);
+        String s3 = new String("Programming");
 
-        String str = sb.toString();
+        System.out.println(s1 == s2);
+        System.out.println(s1 == s3);
+        System.out.println(s2 == s3);
+
+        Scanner sc = new Scanner(System.in);
+        System.out.printf("Enter any String: ");
+        String s4 = sc.nextLine();
+        System.out.printf("Enter any String: ");
+        String s5 = sc.nextLine();
+
+        // == -> false(compares references not values) & equals() -> True
+        System.out.println(s4 == s5);
+        System.out.println(s4.equals(s5));
+
+        String s = 50 + 40 + "String" + 100 + 90;
+        // Java reads "+" from left to right.
+        // If both sides are numbers → it adds them.
+        // If one side is a string → it sticks them together as text.
+        System.out.println(s);
+
+        String str = "java, rust, go, web3";
         System.out.println(str);
+        String[] langs = str.split(",");
 
-        System.out.println("-------------------------------------");
-        System.out.println("String Builder");
+        for (String lang : langs) {
+            System.out.println(lang);
+        }
 
-        StringBuffer sbi = new StringBuffer();
-        sb.append("mutable, method chaining, thread safe");
+        // String Methods --> concat(), split(), equals(), charAt(), length(),
+        // replace(), intern()= returns a canonical representation of the string
+        // object from the string pool(pullling object from the string pool);
+        // substring(),
+        String ss = new String("Sridinesh");
+        System.out.println(ss.intern());
+
+        // Class Loader -> uses a string object as an argument
+        // Thread safe -> as the string object is immutable we dont' have to take care
+        // fo the synchronization that is required while sharing an oject across
+        // multiple threads.
+        // Heap Space -> the immutabiltiy of string helps to minimize the usage in the
+        // heap memory.
+        sc.close();
 
     }
-
 }

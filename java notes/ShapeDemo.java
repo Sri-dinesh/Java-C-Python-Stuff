@@ -47,6 +47,8 @@ public class ShapeDemo {
     t.setParam(base, height);
     t.shapeArea();
 
+    sc.close();
+
   }
 
 }
