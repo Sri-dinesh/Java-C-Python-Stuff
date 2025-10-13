@@ -1,59 +1,63 @@
-import java.util.*;
-import java.io.*;
-
 class Exceptions {
   public static void main(String[] args) {
-    
-    Scanner sc = new Scanner(System.in);
-    // Exceptions --> continue the flow of execution.Try, catch, finally, throw, throws.    
-    // an exception is an abonormal condition that arises in a code at run time. --> run time error... when an exception occurs the normal flow of the program is
-    // disrupted and the program terminates abnormally, which is not recommended. 
-    // Ex: DivisionByZero, ArrayIndexOutOfBoundsException, Invalid data, file that needs to be openend cannot be found, network connection lost
-    // some of these exceptions are caused by user, others by programmer error, and others are physical resources that have failed in some manner.
-    // "exception handling is a mechanism to handle the runtime error, so that the normal flow of application can be maintained."
-    // 3 Types of exceptions --> 1. User Defined Exception | 2. Built-In Excpetions > 2.1 Checked Exception; 2.2 Unchecked Exception | 3. Error
 
+    // java.lang - 5 keywords
+    // try --> if we suspect a code having run time error.
+    // catch --> catch an exception(catch is always followed by try) one catch or
+    // multiple catch blocks.
+    // finally --> irrespective of try and catch block runs or not finally block
+    // will execute.
+    // throw --> within a method(throw a single exception)
+    // throws --> multiple exceptions can be thrown,
 
-    // Types of Exception
+    // Checked Exceptions: ClassNotFoundException, FileNotFoundException,
+    // IOException, InterruptedException.
+    // Unchecked Exception: Is an exception that occurs at time of exception, also
+    // called as Runtime Exception.
+    // Ignored at the time of compilation... ArithmeticException,
+    // ArrayIndexOutOfBoundsException, NullPointerException,
+    // NumberFormatException, StringOutOfBoundsException.
+    //
 
-    //   userDefined         Built-In
-                              
-    //                    Checked           Unchecked
-    //                classnotfound     arithmatic, classCast, NullPointer, ArrayStore, IllegalThreadState, 
-    //                interrupted
-    //                io
-    //                sql
-    //                fileNotFound
-
-    // Checked Exception --> An exception that occurs at the compile time. Exceptions cannot be ignored, the programmer should take care of those exceptions.
-
-
-
-    System.out.println("Enter any 2 numbers: ");
-    int num1 = sc.nextInt();
-    int num2 = sc.nextInt();
-
-    int arr[] = {0, 1, 2, 3, 4};
-
-    try {
-      int num3 = num1 / num2;
-      System.out.println(num3);
-     } catch(Exception e) {
-      System.out.println(e);
-    }
-
-    try {
-      System.out.println(arr[8]);
-    } catch(ArrayIndexOutOfBoundsException e) {
-      System.out.println(e);
-    } finally {
-      System.out.println("End of the Try - Catch");
-    }
-
-
-    for(int i = 0 ; i<arr.length; i++) {
-      System.out.println(arr[i]);
-    }
-
+    // Printing Exception Information --> obj.stackTrace(), obj.toString(),
+    // obj.GetMessage().
+    //
+    // Sytstem generated exceptions are automatically thrown by the java runtime.
+    //
+    // THROW - used explicity to throw an exception from a method or constructor.
+    // Mainly used to throw custom exception. When a trow statement is encountered,
+    // program execution is failed, and the nearest catch statement
+    // is searched for a matching kind of exception.
+    //
+    // Syntax --> throw ThrowableInstance(); Ex: throw new ArithmeticException();
+    //
+    //
+    // THROWS - Method may throw exceptions during the execution of program using
+    // the throws keyword. is used to declare list of exception
+    // that a method may throw during execution.
+    //
+    //
+    // THROW vs THROWS differences:
+    //
+    // throw an excpetion explicity | used to declare an exception possbile during
+    // its excecution.
+    // is followed by instance of Throwable class or one of its sub-class | is
+    // follewed by one or more exception class names separted by commas.
+    // declared inside a method body | is used with method signature(method
+    // declaration).
+    //
+    //
+    // FINALLY - used to create a block of code that follows a Try Block, is always
+    // executed weather there's an exception or not.
+    // lets you run any cleanup type statements that you want to execute.
+    //
+    //
+    // CUSTOM EXCEPTION - Allows us to create our own exception class to provide own
+    // exception implementation. create you own exception simply by
+    // extending Java Exception Class. We can define our own constructor(default,
+    // parameterized).
+    //
+    //
+    //
   }
 }
