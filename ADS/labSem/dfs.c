@@ -47,30 +47,64 @@ void dfs(int i) {
 }
 
 /*
-1.  Global Variables:
-    ->   n: Number of vertices.
-    ->   visited[MAX]: Array to keep track of visited nodes (0 = not visited, 1 = visited).
-    ->   adj[MAX][MAX]: Adjacency matrix to store the graph connections (1 = edge exists).
+================================================================================
+                    DEPTH FIRST SEARCH (DFS) - ALGORITHM
+================================================================================
 
-2.  Create Graph Function (create_graph):
-    ->   Input: Ask for the number of vertices (n).
-    ->   Loop: Run a loop for maximum possible edges (n -> (n-1)).
-    ->   Edge Input: Ask for origin and destin for each edge.
-    ->   Exit Condition: If user enters -1 -1, break the loop.
-    ->   Validation: Check if vertices are valid (0 to n-1). If invalid, decrement counter c and retry.
-    ->   Store: Set adj[origin][destin] = 1 to mark the edge.
+GLOBAL VARIABLES:
+-----------------
+    n           : Number of vertices
+    visited[]   : Array to track visited nodes (0 = not visited, 1 = visited)
+    adj[][]     : Adjacency matrix (1 = edge exists, 0 = no edge)
 
-3.  DFS Function (dfs(int i)):
-    ->   Print & Mark: Print the current node i and mark it as visited (visited[i] = 1).
-    ->   Explore Neighbors: Loop through all possible vertices (j from 0 to n).
-    ->   Condition: If node j is NOT visited AND there is an edge from i to j (adj[i][j] == 1).
-    ->   Recurse: Call dfs(j) to go deeper.
+--------------------------------------------------------------------------------
+ALGORITHM: CREATE_GRAPH()
+--------------------------------------------------------------------------------
+    Step 1: INPUT number of vertices (n)
+    Step 2: max_edge = n * (n - 1)
+    Step 3: FOR c = 1 TO max_edge DO
+                INPUT origin, destin
+                IF origin == -1 AND destin == -1 THEN
+                    BREAK
+                ELSE IF origin or destin is INVALID THEN
+                    PRINT "Invalid edge"
+                    c = c - 1
+                ELSE
+                    adj[origin][destin] = 1
+                ENDIF
+            ENDFOR
+    Step 4: END
 
-Easy Memory Trick:
-->   Setup: Remember 3 globals: n, visited[], adj[][].
-->   Graph Creation: Just a loop asking for "from" and "to" until "-1 -1".
-->   DFS Logic: "Visit, Print, Loop".
-    1. Print current.
-    2. Mark current.
-    3. Loop neighbors: If (Not Visited && Connected) -> Go there dfs(j).
+--------------------------------------------------------------------------------
+ALGORITHM: DFS(i)
+--------------------------------------------------------------------------------
+    Step 1: PRINT i
+    Step 2: visited[i] = 1              // Mark as visited
+    Step 3: FOR j = 0 TO n-1 DO
+                IF visited[j] == 0 AND adj[i][j] == 1 THEN
+                    DFS(j)              // Recursive call
+                ENDIF
+            ENDFOR
+    Step 4: END
+
+================================================================================
+📌 QUICK MEMORY TRICK:
+================================================================================
+    ✓ DFS = "Go Deep Before Wide" (uses RECURSION/STACK)
+    ✓ 3 GLOBALS: n, visited[], adj[][]
+    
+    ✓ DFS LOGIC - Remember "PML":
+        P - PRINT current vertex
+        M - MARK as visited (visited[i] = 1)
+        L - LOOP through neighbors, if (not visited && connected) → recurse
+    
+    ✓ CREATE GRAPH:
+        - Loop until -1 -1
+        - Validate vertices (0 to n-1)
+        - Set adj[origin][destin] = 1
+
+    ✓ DFS vs BFS:
+        - DFS uses STACK (recursion) → Goes DEEP first
+        - BFS uses QUEUE → Goes WIDE first (level by level)
+================================================================================
 */

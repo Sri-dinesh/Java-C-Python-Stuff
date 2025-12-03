@@ -86,41 +86,97 @@ int main() {
 }
 
 /*
-Step-by-Step Explanation to Remember and Write the Program:
+================================================================================
+                    DICTIONARY (Key-Value Store) - ALGORITHM
+================================================================================
 
-1. Structure Definition (struct Node):
-   - key: The unique identifier (like a word in a dictionary).
-   - value: The data associated with the key (like the meaning).
-   - next: Pointer to the next node (linked list).
-   - head: Global pointer to the start of the list.
+STRUCTURE:
+----------
+    struct Node {
+        int key
+        int value
+        struct Node *next
+    }
+    Pointer: head (initially NULL)
 
-2. Insert Function (insert(int key, int value)):
-   - Step 1 - Check for Existing Key: Loop through the list. If key already exists, UPDATE the value and return.
-   - Step 2 - Create New Node: Allocate memory, set key, value, and next = NULL.
-   - Step 3 - Add to List:
-       - If head == NULL (empty list): Make new node the head.
-       - Else: Traverse to the end and link the new node.
+--------------------------------------------------------------------------------
+ALGORITHM: INSERT(key, value)
+--------------------------------------------------------------------------------
+    Step 1: temp = head
+    Step 2: WHILE temp != NULL DO           // Check if key exists
+                IF temp->key == key THEN
+                    temp->value = value     // UPDATE existing
+                    RETURN
+                ENDIF
+                temp = temp->next
+            ENDWHILE
+    Step 3: Create newNode with key, value, next = NULL
+    Step 4: IF head == NULL THEN
+                head = newNode
+            ELSE
+                Traverse to end of list
+                lastNode->next = newNode
+            ENDIF
+    Step 5: END
 
-3. Delete Function (deleteKey(int key)):
-   - Track Two Pointers: temp (current) and prev (previous).
-   - Loop and Find: Traverse until you find the key.
-   - Delete:
-       - If prev == NULL (deleting head): Move head to head->next.
-       - Else: Bypass the node (prev->next = temp->next).
-   - Free Memory: free(temp).
+--------------------------------------------------------------------------------
+ALGORITHM: DELETE(key)
+--------------------------------------------------------------------------------
+    Step 1: temp = head, prev = NULL
+    Step 2: WHILE temp != NULL DO
+                IF temp->key == key THEN
+                    IF prev == NULL THEN    // Deleting head
+                        head = temp->next
+                    ELSE
+                        prev->next = temp->next  // Bypass node
+                    ENDIF
+                    FREE temp
+                    RETURN
+                ENDIF
+                prev = temp
+                temp = temp->next
+            ENDWHILE
+    Step 3: END
 
-4. Search Function (search(int key)):
-   - Loop through the list.
-   - If key matches, return the value.
-   - If not found, return -1.
+--------------------------------------------------------------------------------
+ALGORITHM: SEARCH(key)
+--------------------------------------------------------------------------------
+    Step 1: temp = head
+    Step 2: WHILE temp != NULL DO
+                IF temp->key == key THEN
+                    RETURN temp->value
+                ENDIF
+                temp = temp->next
+            ENDWHILE
+    Step 3: RETURN -1                       // Not found
 
-5. Display Function (display()):
-   - Loop through the list and print each key and value.
+--------------------------------------------------------------------------------
+ALGORITHM: DISPLAY()
+--------------------------------------------------------------------------------
+    Step 1: temp = head
+    Step 2: WHILE temp != NULL DO
+                PRINT temp->key, temp->value
+                temp = temp->next
+            ENDWHILE
+    Step 3: END
 
-Easy Memory Trick (Dictionary = Linked List):
-   - Node: key, value, next.
-   - Insert: Find if exists (update) -> Else create and add at end.
-   - Delete: Find node, bypass it, free it. (Remember prev pointer!)
-   - Search: Loop until key matches, return value.
-   - Display: Loop and print.
+================================================================================
+📌 QUICK MEMORY TRICK:
+================================================================================
+    ✓ DICTIONARY = Linked List with (key, value) pairs
+    
+    ✓ INSERT: "Check First, Then Add"
+        - Loop to find existing key → UPDATE if found
+        - Else create new node → Add at END
+    
+    ✓ DELETE: "Two Pointers - prev & temp"
+        - prev tracks previous node
+        - If deleting head: head = head->next
+        - Else: prev->next = temp->next (bypass)
+        - Don't forget to FREE!
+    
+    ✓ SEARCH: Loop until key matches, return value (or -1)
+    
+    ✓ DISPLAY: Simple loop → Print key:value pairs
+================================================================================
 */

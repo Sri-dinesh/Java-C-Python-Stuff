@@ -75,45 +75,95 @@ void main() {
 }
 
 /*
-1. Global Setup:
-   - hashTable[SIZE]: An array of integers to store keys.
-   - SIZE = 10: The size of the hash table.
-   - Empty slots are marked with -1.
+================================================================================
+                HASH TABLE (Linear Probing) - ALGORITHM
+================================================================================
 
-2. initHashTable():
-   - Loop through the array and set all values to -1 (means empty).
+GLOBAL VARIABLES:
+-----------------
+    hashTable[SIZE] : Array to store keys
+    SIZE = 10       : Size of hash table
+    EMPTY = -1      : Marker for empty slots
 
-3. hashFunction(int key):
-   - Returns: key % SIZE
-   - This gives the index where the key should go.
+--------------------------------------------------------------------------------
+ALGORITHM: INIT_HASH_TABLE()
+--------------------------------------------------------------------------------
+    Step 1: FOR i = 0 TO SIZE-1 DO
+                hashTable[i] = -1         // Mark all as empty
+            ENDFOR
+    Step 2: END
 
-4. insert(int key):
-   - Step 1: Calculate index using hashFunction(key).
-   - Step 2: If slot is occupied (not -1), move to next index: (index + 1) % SIZE.
-   - Step 3: Keep moving until an empty slot is found.
-   - Step 4: Place the key in that slot.
-   - This is called "Linear Probing" for collision handling.
+--------------------------------------------------------------------------------
+ALGORITHM: HASH_FUNCTION(key)
+--------------------------------------------------------------------------------
+    Step 1: RETURN key % SIZE
 
-5. search(int key):
-   - Step 1: Calculate index using hashFunction(key).
-   - Step 2: Check if hashTable[index] equals the key.
-   - Step 3: If not, move to next index: (index + 1) % SIZE.
-   - Step 4: Stop when key is found (return index) or empty slot is hit (return -1).
+--------------------------------------------------------------------------------
+ALGORITHM: INSERT(key)
+--------------------------------------------------------------------------------
+    Step 1: index = HASH_FUNCTION(key)
+    Step 2: WHILE hashTable[index] != -1 DO   // Collision handling
+                index = (index + 1) % SIZE    // Linear Probing
+            ENDWHILE
+    Step 3: hashTable[index] = key
+    Step 4: END
 
-6. delete(int key):
-   - Step 1: Use search(key) to find the index.
-   - Step 2: If found (index != -1), set hashTable[index] = -1.
-   - Step 3: If not found, print "not found".
+--------------------------------------------------------------------------------
+ALGORITHM: SEARCH(key)
+--------------------------------------------------------------------------------
+    Step 1: index = HASH_FUNCTION(key)
+    Step 2: WHILE hashTable[index] != -1 DO
+                IF hashTable[index] == key THEN
+                    RETURN index              // Found!
+                ENDIF
+                index = (index + 1) % SIZE
+            ENDWHILE
+    Step 3: RETURN -1                         // Not found
 
-7. display():
-   - Loop through the array.
-   - Print index and value (or "Empty" if -1).
+--------------------------------------------------------------------------------
+ALGORITHM: DELETE(key)
+--------------------------------------------------------------------------------
+    Step 1: index = SEARCH(key)
+    Step 2: IF index != -1 THEN
+                hashTable[index] = -1         // Mark as empty
+                PRINT "Deleted"
+            ELSE
+                PRINT "Not found"
+            ENDIF
+    Step 3: END
 
-Easy Memory Trick:
-   - Hash Function: key % SIZE (simple division remainder).
-   - Collision: Linear Probing = (index + 1) % SIZE until empty.
-   - Insert: Find spot, place key.
-   - Search: Find spot, check key, move if collision.
-   - Delete: Search first, then mark as -1.
-   - Empty = -1.
+--------------------------------------------------------------------------------
+ALGORITHM: DISPLAY()
+--------------------------------------------------------------------------------
+    Step 1: FOR i = 0 TO SIZE-1 DO
+                PRINT "[" + i + "] -> "
+                IF hashTable[i] != -1 THEN
+                    PRINT hashTable[i]
+                ELSE
+                    PRINT "Empty"
+                ENDIF
+            ENDFOR
+    Step 2: END
+
+================================================================================
+📌 QUICK MEMORY TRICK:
+================================================================================
+    ✓ HASH FUNCTION: key % SIZE (remainder gives index)
+    
+    ✓ LINEAR PROBING: When collision occurs
+        index = (index + 1) % SIZE
+        Keep moving until empty slot found
+    
+    ✓ INSERT: Calculate index → Probe if occupied → Place key
+    
+    ✓ SEARCH: Calculate index → Check → Probe if mismatch → Return index or -1
+    
+    ✓ DELETE: Search first → If found, mark as -1
+    
+    ✓ EMPTY MARKER: -1 (means slot is available)
+    
+    ✓ WHY % SIZE in probing?
+        - To wrap around (circular behavior)
+        - If index = 9 and SIZE = 10, next = (9+1) % 10 = 0
+================================================================================
 */

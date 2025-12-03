@@ -132,3 +132,100 @@ struct node* find_min(struct node* root) {
         return find_min(root->left);
     return root;
 }
+
+/*
+================================================================================
+                    BINARY SEARCH TREE (BST) - ALGORITHM
+================================================================================
+
+STRUCTURE:
+----------
+    struct node {
+        int data
+        struct node *left, *right
+    }
+
+--------------------------------------------------------------------------------
+ALGORITHM: INSERT(root, x)
+--------------------------------------------------------------------------------
+    Step 1: IF root == NULL THEN
+                Create new node with data = x
+                left = right = NULL
+                RETURN new node
+            ENDIF
+    Step 2: IF x > root->data THEN
+                root->right = INSERT(root->right, x)
+            ELSE
+                root->left = INSERT(root->left, x)
+            ENDIF
+    Step 3: RETURN root
+
+--------------------------------------------------------------------------------
+ALGORITHM: SEARCH(root, x)
+--------------------------------------------------------------------------------
+    Step 1: IF root == NULL OR root->data == x THEN
+                RETURN root
+            ENDIF
+    Step 2: IF x > root->data THEN
+                RETURN SEARCH(root->right, x)
+            ELSE
+                RETURN SEARCH(root->left, x)
+            ENDIF
+
+--------------------------------------------------------------------------------
+ALGORITHM: DELETE(root, x)
+--------------------------------------------------------------------------------
+    Step 1: IF root == NULL THEN RETURN NULL
+    
+    Step 2: IF x > root->data THEN
+                root->right = DELETE(root->right, x)
+            ELSE IF x < root->data THEN
+                root->left = DELETE(root->left, x)
+            ELSE                          // Found the node to delete
+                CASE 1: No children (Leaf)
+                    FREE root, RETURN NULL
+                    
+                CASE 2: One child
+                    temp = (left != NULL) ? left : right
+                    FREE root, RETURN temp
+                    
+                CASE 3: Two children
+                    temp = FIND_MIN(root->right)  // Inorder successor
+                    root->data = temp->data
+                    root->right = DELETE(root->right, temp->data)
+            ENDIF
+    Step 3: RETURN root
+
+--------------------------------------------------------------------------------
+ALGORITHM: FIND_MIN(root)
+--------------------------------------------------------------------------------
+    Step 1: IF root == NULL THEN RETURN NULL
+    Step 2: IF root->left != NULL THEN
+                RETURN FIND_MIN(root->left)
+            ELSE
+                RETURN root
+            ENDIF
+
+--------------------------------------------------------------------------------
+ALGORITHM: TRAVERSALS
+--------------------------------------------------------------------------------
+    INORDER(root):    Left → Root → Right    (Gives SORTED order)
+    PREORDER(root):   Root → Left → Right    (Root FIRST)
+    POSTORDER(root):  Left → Right → Root    (Root LAST)
+
+================================================================================
+📌 QUICK MEMORY TRICK:
+================================================================================
+    ✓ BST RULE: Left < Root < Right
+    ✓ INSERT: Compare → Go Left/Right → Create at NULL
+    ✓ SEARCH: Compare → Go Left/Right → Found or NULL
+    ✓ DELETE 3 CASES:
+        1. Leaf: Just remove
+        2. One child: Replace with child
+        3. Two children: Replace with INORDER SUCCESSOR (min of right)
+    ✓ TRAVERSAL TRICK: 
+        - INorder = IN the middle (L-Root-R)
+        - PREorder = Root comes FIRST (Root-L-R)
+        - POSTorder = Root comes LAST (L-R-Root)
+================================================================================
+*/
